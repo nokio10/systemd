@@ -1,0 +1,6 @@
+May  5 06:47:42 ubuntu whoopsie[1953]: [06:47:42] online ALERT
+May  5 06:47:51 ubuntu systemd[1]: NetworkManager-dispatcher.service: Succeeded.
+May  5 07:09:34 ubuntu wpa_supplicant[811]: wlp3s0: WPA: Group rekeying completed with 50:ff:20:43:71:39 [GTK=CCMP]
+May  5 07:17:01 ubuntu CRON[111107]: (root) CMD (   cd / && run-parts --report /etc/cron.hourly) ALERT
+May  5 07:30:01 ubuntu CRON[111116]: (root) CMD ([ -x /etc/init.d/anacron ] && if [ ! -d /run/systemd/system ]; then /u>May  5 07:33:15 ubuntu systemd[1]: Started Run anacron jobs.
+May  5 07:33:15 ubuntu anacron[111120]: Anacron 2.3 started on 2022-05-05 ALERT

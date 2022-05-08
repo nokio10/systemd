@@ -11,14 +11,21 @@ MACHINES.each do |boxname, boxconfig|
 config.vm.define boxname do |box|
 box.vm.box = boxconfig[:box_name]
 box.vm.box_version = boxconfig[:box_version]
-box.vm.host_name = "ansible"
+box.vm.host_name = "systemd"
 box.vm.provider :virtualbox do |vb|
-box.vm.network "forwarded_port", guest: 22, host: 2201
-box.vm.network "forwarded_port", guest: 8080, host: 8080
 vb.customize ["modifyvm", :id, "--memory", "2048"]
 needsController = false
 box.vm.provision "shell", inline: <<-SHELL
-echo "space 4 shell script"
+sudo cp /vagrant/watchdog /etc/sysconfig/watchdog 
+sudo cp /vagrant/watchlog.service /etc/systemd/system/watchlog.service
+sudo cp /vagrant/watchlog.timer /etc/systemd/system/watchlog.timer
+sudo cp /vagrant/watchlog.sh /opt/watchlog.sh
+sudo chmod +x /opt/watchlog.sh
+sudo cp /vagrant/log /var/log/watchlog.log
+sudo systemctl daemon-reload
+sudo systemctl start watchlog.service
+sudo systemctl start watchlog.timer
+sudo cat /var/log/messages | grep Master -a2
 SHELL
 end
 end
